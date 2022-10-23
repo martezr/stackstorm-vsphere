@@ -22,13 +22,13 @@ from vmwarelib.actions import BaseAction
 
 class VMSnapshotDelete(BaseAction):
 
-    def get_snapshots_by_name_recursively(snapshots, snapname):
+    def get_snapshots_by_name_recursively(self, snapshots, snapname):
         snap_obj = []
         for snapshot in snapshots:
             if snapshot.name == snapname:
                 snap_obj.append(snapshot)
             else:
-                snap_obj = snap_obj + get_snapshots_by_name_recursively(
+                snap_obj = snap_obj + self.get_snapshots_by_name_recursively(
                                         snapshot.childSnapshotList, snapname)
         return snap_obj
 
@@ -54,7 +54,7 @@ class VMSnapshotDelete(BaseAction):
         vm = inventory.get_virtualmachine(self.si_content, vm_id, vm_name)
 
         snapshot_name = snapshot_name
-        snap_obj = get_snapshots_by_name_recursively(
+        snap_obj = self.get_snapshots_by_name_recursively(
                             vm.snapshot.rootSnapshotList, snapshot_name)
         # if len(snap_obj) is 0; then no snapshots with specified name
         if len(snap_obj) == 1:
