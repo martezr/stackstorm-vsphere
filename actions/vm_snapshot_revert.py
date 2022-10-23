@@ -64,7 +64,7 @@ class VMSnapshotDelete(BaseAction):
             print("No snapshots found with name: %s on VM: %s" % (
                                                 snapshot_name, vm.name))
 
-        delete_snapshot_task = snap_obj.RevertToSnapshot_Task(True)
-        successfully_delete_snapshot = self._wait_for_task(delete_snapshot_task)
+        revert_snapshot_task = snap_obj.RevertToSnapshot_Task()
+        successfully_delete_snapshot = self._wait_for_task(revert_snapshot_task)
 
         return {'state': successfully_delete_snapshot}
