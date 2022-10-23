@@ -22,7 +22,7 @@ from vmwarelib.actions import BaseAction
 
 class VMSnapshotCreate(BaseAction):
 
-    def run(self, vm_id, vm_name, snapshot_name,vsphere=None):
+    def run(self, vm_id, vm_name, snapshot_name, snapshot_description, snapshot_virtual_machine_memory, quiesce_file_system, vsphere=None):
         """
         Create a snapshot of a Virtual Machine
 
@@ -30,6 +30,8 @@ class VMSnapshotCreate(BaseAction):
         - vm_id: Moid of Virtual Machine to edit
         - vm_name: Name of Virtual Machine to edit
         - snapshot_name: Name of the Virtual Machine snapshot
+        - snapshot_description:
+
 
         Returns:
         - dict: state true/false
@@ -45,9 +47,9 @@ class VMSnapshotCreate(BaseAction):
 
         # Create Task to add to VM
         snapshot_name = snapshot_name
-        description = "Test snapshot"
-        dump_memory = False
-        quiesce = False
+        description = snapshot_description
+        dump_memory = snapshot_virtual_machine_memory
+        quiesce = quiesce_file_system
 
         print("Creating snapshot %s for virtual machine %s" % (
                                         snapshot_name, vm.name))

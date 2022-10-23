@@ -30,13 +30,13 @@
       description: Whether to snapshot the virtual machine's memory
       required: false
       position: 4
-      default: false
+      default: False
     quiesce_file_system:
       type: boolean
       description: Whether to quiesce the virtual machine's file system
       required: false
       position: 5
-      default: false
+      default: False
     vsphere:
       type: string
       description: Pre-configured vsphere endpoint
